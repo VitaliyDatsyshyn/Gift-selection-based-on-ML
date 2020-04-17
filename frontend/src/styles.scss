@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-image: url(assets/images/backgroung1.jpg);
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+
+.formField {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.person-container{
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
+}
