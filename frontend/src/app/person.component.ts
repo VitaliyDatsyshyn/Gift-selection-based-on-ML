@@ -71,6 +71,7 @@ export class PersonComponent {
 
   public predictPresents() {
     let personCopy = this.Validate();
+    console.log(personCopy);
     this.api.postPerson(personCopy).subscribe(res => {
       this.presents = JSON.parse(JSON.stringify(res));
     });
