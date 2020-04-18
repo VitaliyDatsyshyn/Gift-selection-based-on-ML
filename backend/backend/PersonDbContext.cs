@@ -14,7 +14,7 @@ namespace backend
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=EPUALVIW005B;Database=UniQueDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=EPUALVIW005B;Database=UniQueDB;Trusted_Connection=True;MultipleActiveResultSets=True;");
         }
     }
 }

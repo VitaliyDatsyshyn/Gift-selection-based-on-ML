@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Helpers;
+using backend.ML;
 using backend.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -15,10 +14,13 @@ namespace backend.Controllers
     public class PersonController : ControllerBase
     {
         private readonly PersonDbContext _context;
+        private readonly ModelScorer _modelScorer;
 
         public PersonController(PersonDbContext context)
         {
             _context = context;
+            PresentsHelper.ExtractAllPresents(_context.Persons);
+            _modelScorer = new ModelScorer("model.zip");
         }
 
         [HttpGet("relations")]
@@ -46,7 +48,11 @@ namespace backend.Controllers
             _context.Persons.Add(person);
             await _context.SaveChangesAsync();
 
-            return Ok(new[] { "Laptop", "Kicks", "Play Station"});
+            //ModelBuilder.Build(_context.Persons, "model.zip");
+
+            var predictedPresents = _modelScorer.PredictPresents(person);
+
+            return Ok(predictedPresents);
         }
     }
 }
