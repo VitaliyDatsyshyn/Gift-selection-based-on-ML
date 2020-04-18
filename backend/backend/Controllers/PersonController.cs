@@ -42,9 +42,9 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPerson([FromBody] Person person)
         {
-            //person.ID = _context.Persons.Max(p => p.ID) + 1;
-            //_context.Persons.Add(person);
-            //await _context.SaveChangesAsync();
+            person.ID = _context.Persons.Max(p => p.ID) + 1;
+            _context.Persons.Add(person);
+            await _context.SaveChangesAsync();
 
             return Ok(new[] { "Laptop", "Kicks", "Play Station"});
         }

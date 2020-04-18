@@ -94,10 +94,10 @@ export class PersonComponent {
       personCopy.interests = personCopy.interests.map(x => x).join(",");
     }
     if(personCopy.priceLevel == "") {
-      personCopy.priceLevel = 'medium';
+      personCopy.priceLevel = 'Medium';
     }
     if(personCopy.psycoType == "") {
-      personCopy.psycoType = 'inrovert';
+      personCopy.psycoType = 'Inrovert';
     }
     
     return personCopy;
