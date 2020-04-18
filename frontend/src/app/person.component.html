@@ -11,7 +11,7 @@
     <br>
 
     <mat-form-field class="formField">
-      <input [(ngModel)]="person.age" type="number" min="0" max="120" name="Age" matInput placeholder="Age" required>
+      <input [(ngModel)]="person.age" type="number" pattern="^([1-9]|[1-9][0-9]|[1][0-1][0-9])" min="0" max="120" name="Age" matInput placeholder="Age" required>
     </mat-form-field>
     <mat-form-field class="formField">
       <mat-label>Gender</mat-label>
@@ -72,7 +72,10 @@
       </mat-select>
     </mat-form-field>
   </form>
-  <button style="font-size: 20px;" (click)="predictPresents()" mat-button>SHOW PRESENTS</button>
+  <button style="font-size: 20px;" (click)="predictPresents()" mat-button 
+    [disabled]="!person.firstName||!person.lastName||!person.age||!person.sex">
+    SHOW PRESENTS
+  </button>
   <button style="font-size: 20px;" mat-button>RESET</button>
 
   <form *ngIf="presents" style="width: 100%;float: left;margin-top: 100px;">

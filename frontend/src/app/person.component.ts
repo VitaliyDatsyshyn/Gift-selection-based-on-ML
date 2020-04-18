@@ -70,11 +70,36 @@ export class PersonComponent {
   }
 
   public predictPresents() {
-    let personCopy = Object.assign({}, this.person);
-    personCopy.interests = personCopy.interests.map(x => x).join(",");
-
+    let personCopy = this.Validate();
     this.api.postPerson(personCopy).subscribe(res => {
       this.presents = JSON.parse(JSON.stringify(res));
     });
+  }
+
+  private Validate() {
+    let personCopy = Object.assign({}, this.person);
+    if(personCopy.age > 5) {
+      personCopy.age = personCopy.age - personCopy.age % 5;
+    }
+    if(!this.relations.includes(personCopy.relation)) {
+      personCopy.relation = 'Other';
+    }
+    if(!this.occasions.includes(personCopy.occasion)) {
+      personCopy.occasion = 'Other';
+    }
+    if(personCopy.interests == "") {
+      personCopy.interests = ['Other'];
+    }
+    if(personCopy.interests.length > 0) {
+      personCopy.interests = personCopy.interests.map(x => x).join(",");
+    }
+    if(personCopy.priceLevel == "") {
+      personCopy.priceLevel = 'medium';
+    }
+    if(personCopy.psycoType == "") {
+      personCopy.psycoType = 'inrovert';
+    }
+    
+    return personCopy;
   }
 }
