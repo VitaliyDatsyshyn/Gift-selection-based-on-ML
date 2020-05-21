@@ -34,7 +34,8 @@ export class PersonComponent {
       occasion: "",
       interests: "",
       priceLevel: "",
-      psycoType: ""
+      psycoType: "",
+      present: ""
     }
   }
 
@@ -102,5 +103,12 @@ export class PersonComponent {
     }
     
     return personCopy;
+  }
+
+  public selectPresent(present: string) {
+    this.person.present = present;
+    let personCopy = this.Validate();
+    console.log(personCopy);
+    this.api.postPersonWithPresent(personCopy).subscribe(res => console.log(res));
   }
 }

@@ -42,17 +42,20 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostPerson([FromBody] Person person)
+        public IActionResult PostPerson([FromBody] Person person)
         {
-            person.ID = _context.Persons.Max(p => p.ID) + 1;
-            _context.Persons.Add(person);
-            await _context.SaveChangesAsync();
-
-            //ModelBuilder.Build(_context.Persons, "model.zip");
-
             var predictedPresents = _modelScorer.PredictPresents(person);
-
             return Ok(predictedPresents);
+        }
+
+        [HttpPost()]
+        [Route("AddPerson")]
+        public async Task<IActionResult> AddPersonToDB([FromBody] Person personWithPresent)
+        {
+            personWithPresent.ID = _context.Persons.Max(p => p.ID) + 1;
+            _context.Persons.Add(personWithPresent);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

@@ -21,4 +21,8 @@ export class ApiService {
     postPerson(person) {
         return this.http.post('https://localhost:44386/api/person', person);
     }
+
+    postPersonWithPresent(person) {
+        return this.http.post('https://localhost:44386/api/person/AddPerson', person);
+    }
 }
