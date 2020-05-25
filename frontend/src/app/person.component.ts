@@ -43,6 +43,23 @@ export class PersonComponent {
     this.getDropdownsValues();
   }
 
+  public Reset() {
+    this.person = {
+      firstName: "",
+      lastName: "",
+      age: "",
+      sex: "",
+      relation: "",
+      occasion: "",
+      interests: "",
+      priceLevel: "",
+      psycoType: "",
+      present: ""
+    };
+    this.presents=[]; 
+    this.getDropdownsValues();
+  }
+
   private getDropdownsValues() {
     this.api.getRelations().subscribe(relations => {
       this.relations = JSON.parse(JSON.stringify(relations));
@@ -72,7 +89,6 @@ export class PersonComponent {
 
   public predictPresents() {
     let personCopy = this.Validate();
-    console.log(personCopy);
     this.api.postPerson(personCopy).subscribe(res => {
       this.presents = JSON.parse(JSON.stringify(res));
     });
