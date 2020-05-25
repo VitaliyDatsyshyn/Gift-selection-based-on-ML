@@ -79,7 +79,7 @@
     [disabled]="!person.firstName||!person.lastName||!person.age||!person.sex">
     SHOW PRESENTS
   </button>
-  <button style="font-size: 20px;margin-left: 40px;margin-right: 40px;" class="formField" mat-button>RESET</button>
+  <button style="font-size: 20px;margin-left: 40px;margin-right: 40px;" class="formField" (click)="person={}; presents=[]" mat-button>RESET</button>
 
   <form *ngIf="presents" class="presentsForm">
     <a *ngFor="let present of presents" class="present" target="_blank"

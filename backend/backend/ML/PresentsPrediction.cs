@@ -13,8 +13,10 @@ namespace backend.ML
 
         public string[] GetTopThreePresents()
         {
-            var topScores = Score;
+            var topScores = new float[Score.Length];
+            Array.Copy(Score, topScores, Score.Length);
             Array.Sort(topScores);
+            Array.Reverse(topScores);
             topScores = topScores.Take(3).ToArray();
             var topIndexes = new List<int>();
             foreach(var topScore in topScores)

@@ -1,5 +1,4 @@
 ﻿using GeneticAlgorithmForPresentPrediction.DB;
-using System;
 
 namespace GeneticAlgorithmForPresentPrediction
 {
@@ -7,12 +6,12 @@ namespace GeneticAlgorithmForPresentPrediction
     {
         static void Main(string[] args)
         {
-            var pathToModel = @"C:\Users\Vitaliy_Datsyshyn\Documents\VIka's diploma\repo\dev\backend\backend\model.zip";
+            var pathToModel = @"C:\Users\Vitaliy_Datsyshyn\Documents\VIka's diploma\repo\dev\backend\backend\GeneticModel.zip";
             var dbContext = new PersonDbContext();
             var testingDataSet = dbContext.GetTestingDataSet();
             var population = new Population(20, dbContext.GetTrainingDataSet(testingDataSet), testingDataSet);
             population.BuildModels();
-            var bestChromosome = population.GetBestModelAfterGenerations(3);
+            var bestChromosome = population.GetBestModelAfterGenerations(7);
             bestChromosome.SaveModel(pathToModel);
         }
     }
