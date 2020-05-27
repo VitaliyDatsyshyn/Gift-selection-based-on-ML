@@ -67,7 +67,10 @@ namespace GeneticAlgorithmForPresentPrediction
 
             for (int i = 0; i < Chromosomes.Count; i++)
             {
-                Chromosomes[i].Mutate();
+                if (Chromosomes[i].Metrics == null)
+                    Chromosomes[i].Mutate();
+                else if (Chromosomes[i].Metrics.MicroAccuracy < 92)
+                    Chromosomes[i].Mutate();
             }
         }
 
@@ -111,7 +114,9 @@ namespace GeneticAlgorithmForPresentPrediction
         private Chromosome GetBestModelInList()
         {
             EvaluateModels();
-            return Chromosomes.OrderByDescending(chromosome => chromosome.Metrics.MicroAccuracy).ThenByDescending(chromosome => chromosome.Metrics.MicroAccuracy).ToList().First();
+            return Chromosomes.OrderByDescending(chromosome => chromosome.Metrics.MicroAccuracy)
+                .ThenByDescending(chromosome => chromosome.Metrics.MacroAccuracy)
+                .ToList().First();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace GeneticAlgorithmForPresentPrediction
 
         public Chromosome(IEnumerable<Gen> trainingData)
         {
-            var trainingDatasetSize = trainingData.Count() / 2;
+            var trainingDatasetSize = Convert.ToInt32(trainingData.Count() * 0.8);
             _genesForTrain = GetRandomGenes(trainingData, trainingDatasetSize);
             _genesForMutation = trainingData.Except(_genesForTrain).ToList();
         }

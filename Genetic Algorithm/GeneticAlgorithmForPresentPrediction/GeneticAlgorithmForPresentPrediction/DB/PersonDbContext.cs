@@ -26,7 +26,7 @@ namespace GeneticAlgorithmForPresentPrediction.DB
 
         public IEnumerable<Gen> GetTestingDataSet()
         {
-            int tenPercentsOfPersonsCount = Persons.Count() / 10;
+            int tenPercentsOfPersonsCount = Convert.ToInt32(Persons.Count() * 0.15);
             return Persons.Distinct().OrderBy(arg => Guid.NewGuid()).Take(tenPercentsOfPersonsCount);
         }
     }

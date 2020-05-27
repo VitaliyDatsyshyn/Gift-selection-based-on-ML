@@ -84,7 +84,7 @@
   <form *ngIf="presents?.length > 0" class="presentsForm">
     <a *ngFor="let present of presents" class="present" target="_blank"
       href="https://www.google.com/search?q={{present}}" (click)="selectPresent(present)">
-      <img src="assets\images\{{present.toLowerCase()}}.jpg" style="width: 200px; height: 100px;">
+      <img src="assets\images\{{present.toLowerCase().replace('.', '_').replace(':', '_').replace('-', '_').replace('&', '_')}}.jpg" style="width: 200px; height: 100px; margin: 3px;">
       <caption style="width: 200px;text-align: left;">{{present}}</caption>
     </a>
   </form>

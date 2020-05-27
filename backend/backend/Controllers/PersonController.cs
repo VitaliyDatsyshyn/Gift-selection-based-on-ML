@@ -20,7 +20,7 @@ namespace backend.Controllers
         {
             _context = context;
             PresentsHelper.ExtractAllPresents(_context.Persons);
-            _modelScorer = new ModelScorer("model.zip");
+            _modelScorer = new ModelScorer("GeneticModel.zip");
         }
 
         [HttpGet("relations")]
