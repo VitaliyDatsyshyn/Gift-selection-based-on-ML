@@ -1,4 +1,6 @@
-﻿namespace backend.Models
+﻿using System.Collections.Generic;
+
+namespace backend.Models
 {
     public class Person
     {
@@ -13,5 +15,19 @@
         public string PriceLevel { get; set; }
         public string PsycoType { get; set; }
         public string Present { get; set; }
+
+        public IEnumerable<Person> SplitByInterests()
+        {
+            var interestsArr = Interests.Split(",");
+            var persons = new List<Person>();
+            foreach(var interest in interestsArr)
+            {
+                var person = (Person)this.MemberwiseClone();
+                person.Interests = interest;
+                persons.Add(person);
+            }
+
+            return persons;
+        }
     }
 }

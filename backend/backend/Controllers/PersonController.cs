@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Helpers;
@@ -44,16 +45,22 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult PostPerson([FromBody] Person person)
         {
-            var predictedPresents = _modelScorer.PredictPresents(person);
-            return Ok(predictedPresents);
+            var splittedPersons = person.SplitByInterests();
+            var predictedPresents = new List<string>();
+            foreach (var splittedPerson in splittedPersons)
+            {
+                predictedPresents.AddRange(_modelScorer.PredictPresents(splittedPerson));
+            }
+
+            return Ok(PresentsHelper.GetThreeUniquePresents(predictedPresents));
         }
 
         [HttpPost()]
         [Route("AddPerson")]
         public async Task<IActionResult> AddPersonToDB([FromBody] Person personWithPresent)
         {
-            personWithPresent.ID = _context.Persons.Max(p => p.ID) + 1;
-            _context.Persons.Add(personWithPresent);
+            var splittedPersons = personWithPresent.SplitByInterests();
+            _context.Persons.AddRange(splittedPersons);
             await _context.SaveChangesAsync();
             return Ok();
         }
