@@ -63,7 +63,6 @@ namespace GeneticAlgorithmForPresentPrediction
 
         public void Mutate()
         {
-            BuildModel();
             Random rand = new Random();
             var maxMutationQty = _genesForTrain.Count / 10 + 1;
             int mutationQty = rand.Next(0, maxMutationQty);
@@ -75,6 +74,8 @@ namespace GeneticAlgorithmForPresentPrediction
                 _genesForTrain[trainingIndex] = _genesForMutation[mutationIndex];
                 _genesForMutation[mutationIndex] = temp;
             }
+
+            BuildModel();
         }
 
         public List<Gen> GetTrainingGenes() => _genesForTrain;
